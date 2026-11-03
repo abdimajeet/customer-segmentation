@@ -1,0 +1,58 @@
+{
+  "cfg": {
+    "model": "K-Means",
+    "dataset": "Wholesale Customers, 440 clients",
+    "features": "6 spending categories, log + scaled",
+    "k": "2 (best silhouette)",
+    "init": "k-means++, 10 restarts"
+  },
+  "metric": {
+    "label": "Silhouette score",
+    "value": "0.290"
+  },
+  "metrics": [
+    {
+      "label": "Segments",
+      "value": "2"
+    }
+  ],
+  "curve": {
+    "xLabel": "number of clusters k",
+    "yLabel": "inertia (within-cluster spread)",
+    "x": [
+      1,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9,
+      10
+    ],
+    "train": [
+      2640.0,
+      1844.1,
+      1553.4,
+      1386.9,
+      1266.1,
+      1174.8,
+      1086.4,
+      1028.5,
+      973.1,
+      932.0
+    ],
+    "val": null,
+    "trainLabel": "inertia (elbow method)",
+    "valLabel": null
+  },
+  "findings": [
+    "Spending is very skewed (skewness up to 11.2 for delicatessen), so I log-transformed it before clustering. That way a few very large clients don't dominate the distances.",
+    "Grocery and detergents & paper spending are strongly linked (correlation 0.92): customers who buy one buy the other.",
+    "The elbow chart has no sharp bend, so I chose k with the silhouette score instead: it is highest at k = 2 (0.29).",
+    "Segment 1 (252 customers, 3% retail) spends most on fresh food and grocery.",
+    "Segment 2 (188 customers, 71% retail) spends most on grocery and milk.",
+    "Without ever seeing the channel label, the clusters match hotel/restaurant vs retail for 86% of customers."
+  ]
+}
